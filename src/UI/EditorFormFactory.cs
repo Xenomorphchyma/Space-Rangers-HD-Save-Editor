@@ -883,7 +883,11 @@ namespace SpaceRangersHdSaveEditor
             // Preserve a user- or working-area-constrained width during relayout. Build()
             // already starts at preferredWidth; forcing it again here made sizable dialogs
             // snap back to their design width and hid narrow-screen layout defects locally.
-            Size target = new Size(form.ClientSize.Width, preferredHeight);
+            int targetHeight = string.Equals(definition.Resource, "TSHIPFORM",
+                StringComparison.OrdinalIgnoreCase)
+                ? Math.Min(preferredHeight, form.ClientSize.Height)
+                : preferredHeight;
+            Size target = new Size(form.ClientSize.Width, targetHeight);
             if (form.ClientSize != target) form.ClientSize = target;
         }
 
@@ -1561,15 +1565,16 @@ namespace SpaceRangersHdSaveEditor
             int margin = 10, gap = 10;
             int width = Math.Max(180, (ranger.ClientSize.Width - margin * 2 - gap) / 2);
             int top = leafBottom + 8;
-            quests.SetBounds(margin, top, width, 174);
-            programs.SetBounds(margin + width + gap, top, width, 174);
+            const int collectionHeight = 124;
+            quests.SetBounds(margin, top, width, collectionHeight);
+            programs.SetBounds(margin + width + gap, top, width, collectionHeight);
             ListBox questList = Registered<ListBox>(controls, "lbQuests");
             DataGridView programGrid = Registered<DataGridView>(controls, "sgProgramms");
             if (questList != null) questList.SetBounds(10, 22,
                 Math.Max(100, quests.ClientSize.Width - 20), Math.Max(60, quests.ClientSize.Height - 32));
             if (programGrid != null) programGrid.SetBounds(10, 22,
                 Math.Max(100, programs.ClientSize.Width - 20), Math.Max(60, programs.ClientSize.Height - 32));
-            ranger.Height = Math.Max(220, top + 184);
+            ranger.Height = Math.Max(220, top + collectionHeight + 10);
         }
 
         private static void PackSections(Control page, HashSet<Control> hidden, int columns)

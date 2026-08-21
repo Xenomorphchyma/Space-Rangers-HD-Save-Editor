@@ -422,7 +422,7 @@ internal static class EditorFormsSelfTest
             shipForm.Show();
             // Match the compact client width produced by FitDialogToWorkingArea on the
             // 1024-wide Windows runner. Specialized pages must relayout after shrinking.
-            shipForm.ClientSize = new Size(959, Math.Min(720, shipForm.ClientSize.Height));
+            shipForm.ClientSize = new Size(959, Math.Min(650, shipForm.ClientSize.Height));
             EditorFormFactory.Relayout(shipForm);
             Application.DoEvents();
             pages.SelectedTab = (TabPage)controls["tsSubType"];
