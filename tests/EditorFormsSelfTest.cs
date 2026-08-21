@@ -417,6 +417,11 @@ internal static class EditorFormsSelfTest
             shipForm.StartPosition = FormStartPosition.Manual;
             shipForm.Location = new Point(-32000, -32000);
             shipForm.Show();
+            // Match the compact client width produced by FitDialogToWorkingArea on the
+            // 1024-wide Windows runner. Specialized pages must relayout after shrinking.
+            shipForm.ClientSize = new Size(959, Math.Min(720, shipForm.ClientSize.Height));
+            EditorFormFactory.Relayout(shipForm);
+            Application.DoEvents();
             pages.SelectedTab = (TabPage)controls["tsSubType"];
             Application.DoEvents();
             Panel playerSections = controls.ContainsKey("$playerSections") ?

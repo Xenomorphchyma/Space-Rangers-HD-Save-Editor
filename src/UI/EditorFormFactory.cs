@@ -1394,7 +1394,8 @@ namespace SpaceRangersHdSaveEditor
             frame.Visible = false;
             HashSet<Control> hidden = HiddenControls(form);
             if (hidden != null) hidden.Add(frame);
-            shipTabs.SetBounds(8, 6, Math.Max(760, form.ClientSize.Width - 16), 628);
+            int shipTabsWidth = Math.Max(760, form.ClientSize.Width - 16);
+            shipTabs.SetBounds(8, 6, shipTabsWidth, 628);
 
             TabPage parameters = Registered<TabPage>(controls, "tsParams");
             TabControl parameterTabs = Registered<TabControl>(controls, "pcParams");
@@ -1423,8 +1424,9 @@ namespace SpaceRangersHdSaveEditor
             LayoutRangerSections(controls);
 
             LayoutPlayerPages(form, controls);
-            LayoutShipHold(Registered<TabPage>(controls, "tsHold"), controls);
-            LayoutShipMods(Registered<TabPage>(controls, "tsMods"), controls);
+            int outerPageWidth = Math.Max(720, shipTabsWidth - 12);
+            LayoutShipHold(Registered<TabPage>(controls, "tsHold"), controls, outerPageWidth);
+            LayoutShipMods(Registered<TabPage>(controls, "tsMods"), controls, outerPageWidth);
             PackSections(Registered<TabPage>(controls, "tsRuins"), HiddenControls(form), 3);
             return 644;
         }
@@ -1690,11 +1692,12 @@ namespace SpaceRangersHdSaveEditor
             }
         }
 
-        private static void LayoutShipHold(TabPage page, Dictionary<string, Control> controls)
+        private static void LayoutShipHold(TabPage page, Dictionary<string, Control> controls,
+            int availableWidth)
         {
             if (page == null) return;
             int margin = 8, gap = 10;
-            int width = page.ClientSize.Width - margin * 2;
+            int width = Math.Max(680, availableWidth - margin * 2);
             int half = (width - gap) / 2;
             GroupBox equipment = Registered<GroupBox>(controls, "gbEquipments");
             GroupBox artefacts = Registered<GroupBox>(controls, "gbArtefacts");
@@ -1804,11 +1807,12 @@ namespace SpaceRangersHdSaveEditor
             }
         }
 
-        private static void LayoutShipMods(TabPage page, Dictionary<string, Control> controls)
+        private static void LayoutShipMods(TabPage page, Dictionary<string, Control> controls,
+            int availableWidth)
         {
             if (page == null) return;
             int margin = 8, gap = 10;
-            int width = page.ClientSize.Width - margin * 2;
+            int width = Math.Max(680, availableWidth - margin * 2);
             int half = (width - gap) / 2;
             PlaceListGroup(Registered<GroupBox>(controls, "gbModsDropList"),
                 Registered<ListBox>(controls, "lbDropList"), margin, margin, half, 536);
