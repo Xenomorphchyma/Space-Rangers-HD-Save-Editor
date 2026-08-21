@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <PlatformTarget>x86</PlatformTarget>
+    <RootNamespace>SpaceRangersHdSaveEditor</RootNamespace>
+    <AssemblyName>SRHDSaveEditor</AssemblyName>
+    <Version>1.0.0-rc.1</Version>
+    <Authors>Xenomorphchyma</Authors>
+    <Company>Xenomorphchyma</Company>
+    <Copyright>Copyright © 2026 Xenomorphchyma</Copyright>
+    <Description>Independent save editor for Space Rangers HD: A War Apart.</Description>
+    <RepositoryUrl>https://github.com/Xenomorphchyma/Space-Rangers-HD-Save-Editor</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="src\**\*.cs" />
+  </ItemGroup>
+</Project>

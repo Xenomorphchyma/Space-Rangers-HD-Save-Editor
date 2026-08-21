@@ -1,0 +1,27 @@
+{
+  "schema": "srhd-save-editor-release-v1",
+  "product": "Space Rangers HD Save Editor",
+  "author": "Xenomorphchyma",
+  "repository": "https://github.com/Xenomorphchyma/Space-Rangers-HD-Save-Editor",
+  "version": "1.0.0-rc.1",
+  "file": "SRHDSaveEditor.exe",
+  "length": 1090560,
+  "sha256": "4C48A863DA8E33D0BBC67DF9FEEDF1CE0E499DC099BCA083C7F875BDF900B764",
+  "architecture": "x86",
+  "runtime": ".NET Framework 4.8",
+  "tests": {
+    "python": 8,
+    "semantic_forms": 48,
+    "semantic_controls": 1958,
+    "editor_dialog_visual_smoke": true,
+    "visual_smoke": true,
+    "corpus_saves": 177,
+    "game_catalog": true,
+    "catalog_references": true
+  },
+  "privacy": {
+    "network_code": false,
+    "telemetry": false,
+    "original_save_overwrite": false
+  }
+}

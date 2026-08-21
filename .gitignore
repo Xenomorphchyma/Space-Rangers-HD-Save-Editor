@@ -1,0 +1,11 @@
+build/
+release/*.exe
+release/*.zip
+*.user
+*.suo
+.vs/
+bin/
+obj/
+__pycache__/
+*.pyc
+*.sav

@@ -1,0 +1,22 @@
+name: Предложение
+description: Предложить улучшение редактора
+title: "[Feature] "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Какая проблема решается
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Предлагаемое поведение
+    validations:
+      required: true
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: Совместимость
+      description: Укажите, относится ли предложение к обычным или модовым SAV.

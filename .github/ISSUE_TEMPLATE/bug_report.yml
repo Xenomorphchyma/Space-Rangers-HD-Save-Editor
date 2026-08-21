@@ -1,0 +1,39 @@
+name: Ошибка
+description: Сообщить о воспроизводимой ошибке редактора
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Не прикладывайте публично личные SAV. Укажите только версию игры, редактора и безопасные диагностические данные.
+  - type: input
+    id: version
+    attributes:
+      label: Версия редактора
+      placeholder: 1.0.0-rc.1
+    validations:
+      required: true
+  - type: input
+    id: game
+    attributes:
+      label: Версия игры и моды
+      description: Укажите версию SRHD и список активных модов без локальных путей.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Шаги воспроизведения
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Ожидаемый и фактический результат
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Безопасная диагностика
+      description: Текст ошибки, версия SAV и скриншот без персональных данных.

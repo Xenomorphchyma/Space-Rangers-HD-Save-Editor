@@ -1,0 +1,36 @@
+name: publish-release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Verify and package
+        id: package
+        shell: powershell
+        run: |
+          $version = '${{ github.ref_name }}'.TrimStart('v')
+          if ([string]::IsNullOrWhiteSpace($version)) { throw 'Release tag has no version.' }
+          .\tools\verify.ps1 -GamePath '' -Version $version
+          .\tools\package_release.ps1 -Version $version
+          $archive = "release/Space-Rangers-HD-Save-Editor-$version-win-x86.zip"
+          "archive=$archive" >> $env:GITHUB_OUTPUT
+      - name: Publish GitHub Release
+        shell: powershell
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create '${{ github.ref_name }}' '${{ steps.package.outputs.archive }}' `
+            'release/manifest.json' --verify-tag --generate-notes `
+            --title "Space Rangers HD Save Editor ${{ github.ref_name }}"
