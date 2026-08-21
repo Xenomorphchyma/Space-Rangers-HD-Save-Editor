@@ -74,6 +74,9 @@ internal static class EditorFormsSelfTest
                     if (overflow != null)
                         throw new InvalidOperationException(resource + " has horizontal overflow: " + overflow);
                     form.Scale(new SizeF(1.5F, 1.5F));
+                    // On a real high-DPI launch Shown performs this pass after Windows
+                    // constrains the scaled dialog to the working area.
+                    EditorFormFactory.Relayout(form);
                     Application.DoEvents();
                     overflow = FindHorizontalOverflow(form);
                     if (overflow != null)
