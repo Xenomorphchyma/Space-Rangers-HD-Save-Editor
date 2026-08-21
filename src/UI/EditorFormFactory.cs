@@ -592,7 +592,7 @@ namespace SpaceRangersHdSaveEditor
                 { "TSHIPFORM/lblAverageFreeSpaceRatio", "Свободное место в корпусах:" },
                 { "TSHIPFORM/lblAverageMoneyToCapital", "Деньги / капитал:" },
                 { "TSHIPFORM/lblRatioOfTooCostlyEqInShop", "Дорогое оснащение, %:" },
-                { "TSHIPFORM/lblLiberationKills", "Побед при освобождении:" },
+                { "TSHIPFORM/lblLiberationKills", "Побед при освобожд.:" },
                 { "TSHIPFORM/lblKillAllShips", "Убито кораблей:" },
                 { "TSHIPFORM/lblKillDominators", "Убито доминаторов:" },
                 { "TSHIPFORM/lblKillRangers", "Убито рейнджеров:" },
@@ -1399,20 +1399,20 @@ namespace SpaceRangersHdSaveEditor
 
             TabPage parameters = Registered<TabPage>(controls, "tsParams");
             TabControl parameterTabs = Registered<TabControl>(controls, "pcParams");
+            int parameterTabsWidth = Math.Max(660, shipTabsWidth - 24);
+            int parameterTabsHeight = Math.Max(510, shipTabs.Height - 44);
             if (parameters != null && parameterTabs != null)
             {
-                parameterTabs.SetBounds(6, 6,
-                    Math.Max(660, shipTabs.ClientSize.Width - 24),
-                    Math.Max(510, shipTabs.ClientSize.Height - 44));
+                parameterTabs.SetBounds(6, 6, parameterTabsWidth, parameterTabsHeight);
                 // The fixed semantic form is explicitly relaid out on resize.  Anchoring this
                 // nested tab control as well would apply the DPI delta twice during Scale().
                 parameterTabs.Anchor = AnchorStyles.Top | AnchorStyles.Left;
             }
 
             int parameterPageWidth = parameterTabs == null ? form.ClientSize.Width - 64 :
-                Math.Max(700, parameterTabs.ClientSize.Width - 12);
+                Math.Max(700, parameterTabsWidth - 12);
             int parameterPageHeight = parameterTabs == null ? form.ClientSize.Height - 110 :
-                Math.Max(470, parameterTabs.ClientSize.Height - 34);
+                Math.Max(470, parameterTabsHeight - 34);
             LayoutShipMainPage(Registered<TabPage>(controls, "tsMain"), controls,
                 HiddenControls(form), parameterPageWidth, parameterPageHeight);
             LayoutShipAdditionalPage(Registered<TabPage>(controls, "tsAdditional"), controls,
@@ -1575,7 +1575,7 @@ namespace SpaceRangersHdSaveEditor
             if (ownerForm != null && ownerTabs != null &&
                 string.Equals(ownerTabs.Name, "pcParams", StringComparison.OrdinalIgnoreCase) &&
                 string.Equals(ownerForm.Name, "TSHIPFORM", StringComparison.OrdinalIgnoreCase))
-                availableWidth = Math.Max(availableWidth, ownerForm.ClientSize.Width - 64);
+                availableWidth = Math.Max(620, ownerForm.ClientSize.Width - 64);
             int sectionWidth = Math.Max(220,
                 (availableWidth - margin * 2 - gap * (columns - 1)) / columns);
             int[] columnY = new int[columns];
