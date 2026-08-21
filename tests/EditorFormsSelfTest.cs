@@ -381,7 +381,10 @@ internal static class EditorFormsSelfTest
             galaxy.Location = new Point(-32000, -32000);
             galaxy.Show();
             Application.DoEvents();
-            if (galaxy.ClientSize.Width < 1080 || controls["gbDifficulty"].Left == controls["gbResearch"].Left)
+            // Hosted runners can expose a 1024 px working area.  The dialog must respect
+            // that limit while retaining the intended three distinct columns.
+            if (galaxy.ClientSize.Width < 900 || controls["gbDifficulty"].Left == controls["gbResearch"].Left ||
+                controls["gbResearch"].Left == controls["gbPlanetNews"].Left)
                 throw new InvalidOperationException("Galaxy editor did not use its wide three-column layout.");
             TabControl galaxyOuter = (TabControl)controls["pcGalaxy"];
             foreach (string outerName in new string[] { "tsMain", "tsCustomRules" })
