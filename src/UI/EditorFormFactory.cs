@@ -599,9 +599,12 @@ namespace SpaceRangersHdSaveEditor
                 { "TSHIPFORM/lblKillWarriors", "Убито военных:" },
                 { "TSHIPFORM/lblKillCustomInCurSystem", "Мод. кораблей в системе:" },
                 { "TSHIPFORM/lblKillInCurSystemNormals", "Коалиционных в системе:" },
-                { "TSHIPFORM/lblKillInCurSystemDominators", "Доминаторов в системе:" },
+                { "TSHIPFORM/lblKillInCurSystemDominators", "Доминаторов в сист.:" },
                 { "TSHIPFORM/lblKillInCurSystemPirates", "Пиратов в системе:" },
                 { "TSHIPFORM/lblRank", "Ранг коалиции:" },
+                { "TSHIPFORM/lblLiberationPlanet", "Освобожд. планета:" },
+                { "TSHIPFORM/lblPirateRankPoints", "Очки ранга пиратов:" },
+                { "TSHIPFORM/lblStatusChangeTrader", "Смена торг. статуса:" },
                 { "TSHIPFORM/chbOrderAbsolute", "Приоритет" }
             };
 
@@ -877,7 +880,10 @@ namespace SpaceRangersHdSaveEditor
                 string.Equals(definition.Resource, "TMAINFORM", StringComparison.OrdinalIgnoreCase)) return;
             int preferredHeight = Math.Max(120,
                 Math.Min(definition.ClientHeight, contentHeight + 6));
-            Size target = new Size(preferredWidth, preferredHeight);
+            // Preserve a user- or working-area-constrained width during relayout. Build()
+            // already starts at preferredWidth; forcing it again here made sizable dialogs
+            // snap back to their design width and hid narrow-screen layout defects locally.
+            Size target = new Size(form.ClientSize.Width, preferredHeight);
             if (form.ClientSize != target) form.ClientSize = target;
         }
 
@@ -1950,7 +1956,9 @@ namespace SpaceRangersHdSaveEditor
                 if (placed.Contains(child)) continue;
                 bool fullRow = child is TextBox && ((TextBox)child).Multiline ||
                     child is ListBox || child is CheckedListBox || child is ListView ||
-                    child is TreeView || child is DataGridView || child is PictureBox;
+                    child is TreeView || child is DataGridView || child is PictureBox ||
+                    child is CheckBox && string.Equals(container.Name, "gbProhibitions",
+                        StringComparison.OrdinalIgnoreCase);
                 if (fullRow && column != 0)
                 {
                     y += rowHeight;
@@ -2020,7 +2028,7 @@ namespace SpaceRangersHdSaveEditor
         {
             if (sections.Count < 2) return false;
             if (container is GroupBox && string.Equals(container.Name, "gbAdditional",
-                StringComparison.OrdinalIgnoreCase) && availableWidth >= 620) return true;
+                StringComparison.OrdinalIgnoreCase) && availableWidth >= 500) return true;
             if (!(container is TabPage) || availableWidth < 720) return false;
             Form form = container.FindForm();
             string resource = form == null ? string.Empty : form.Name;
