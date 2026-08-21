@@ -1962,8 +1962,10 @@ namespace SpaceRangersHdSaveEditor
                 bool fullRow = child is TextBox && ((TextBox)child).Multiline ||
                     child is ListBox || child is CheckedListBox || child is ListView ||
                     child is TreeView || child is DataGridView || child is PictureBox ||
-                    child is CheckBox && string.Equals(container.Name, "gbProhibitions",
-                        StringComparison.OrdinalIgnoreCase);
+                    child is CheckBox && (string.Equals(container.Name, "gbProhibitions",
+                        StringComparison.OrdinalIgnoreCase) ||
+                        string.Equals(container.Name, "gbFileFlags",
+                            StringComparison.OrdinalIgnoreCase));
                 if (fullRow && column != 0)
                 {
                     y += rowHeight;
