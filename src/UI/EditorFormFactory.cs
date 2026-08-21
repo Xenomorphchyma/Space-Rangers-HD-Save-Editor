@@ -1439,7 +1439,10 @@ namespace SpaceRangersHdSaveEditor
             if (page == null) return;
             int margin = 8, gap = 8;
             int pageWidth = availableWidth;
-            int rightWidth = Math.Max(380, pageWidth * 30 / 100);
+            // Give the label-heavy statistics block enough room to retain its compact
+            // two-column layout with the wider Segoe UI metrics used by hosted Windows
+            // runners.  The chameleon controls need much less horizontal space.
+            int rightWidth = Math.Max(330, pageWidth * 28 / 100);
             int leftWidth = pageWidth - margin * 2 - gap - rightWidth;
             int mainBottom = PlaceAutoGroup(Registered<GroupBox>(controls, "gbAdditional"),
                 margin, margin, leftWidth, hidden);
