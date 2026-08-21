@@ -1396,7 +1396,8 @@ namespace SpaceRangersHdSaveEditor
             HashSet<Control> hidden = HiddenControls(form);
             if (hidden != null) hidden.Add(frame);
             int shipTabsWidth = Math.Max(760, form.ClientSize.Width - 16);
-            shipTabs.SetBounds(8, 6, shipTabsWidth, 628);
+            int shipTabsHeight = Math.Max(628, form.ClientSize.Height - 16);
+            shipTabs.SetBounds(8, 6, shipTabsWidth, shipTabsHeight);
 
             TabPage parameters = Registered<TabPage>(controls, "tsParams");
             TabControl parameterTabs = Registered<TabControl>(controls, "pcParams");
@@ -1429,7 +1430,10 @@ namespace SpaceRangersHdSaveEditor
             LayoutShipHold(Registered<TabPage>(controls, "tsHold"), controls, outerPageWidth);
             LayoutShipMods(Registered<TabPage>(controls, "tsMods"), controls, outerPageWidth);
             PackSections(Registered<TabPage>(controls, "tsRuins"), HiddenControls(form), 3);
-            return 644;
+            // Keep the full 700 px design height.  Collapsing the dialog to 650 px left
+            // too little vertical room for the five collection lists on systems whose
+            // font metrics make the statistics captions wrap.
+            return 694;
         }
 
         private static void LayoutShipAdditionalPage(TabPage page,
