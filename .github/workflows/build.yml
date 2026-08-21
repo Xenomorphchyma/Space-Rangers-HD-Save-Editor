@@ -25,13 +25,3 @@ jobs:
           path: |
             release/SRHDSaveEditor.exe
             release/manifest.json
-            README.md
-            AUTHORS.md
-            CHANGELOG.md
-            CONTRIBUTING.md
-            LICENSE
-            NOTICE.md
-            SECURITY.md
-            THIRD-PARTY-NOTICES.md
-            SUPPORT.md
-            PUBLISHING.md

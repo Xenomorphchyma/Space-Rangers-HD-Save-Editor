@@ -21,16 +21,8 @@ if ($manifest.sha256 -ne $actualHash) {
 $archive = Join-Path $releaseRoot ("Space-Rangers-HD-Save-Editor-{0}-win-x86.zip" -f $Version)
 $files = @(
     $exe,
-    $manifestPath,
     (Join-Path $projectRoot 'README.md'),
-    (Join-Path $projectRoot 'AUTHORS.md'),
-    (Join-Path $projectRoot 'CHANGELOG.md'),
-    (Join-Path $projectRoot 'CONTRIBUTING.md'),
-    (Join-Path $projectRoot 'LICENSE'),
-    (Join-Path $projectRoot 'NOTICE.md'),
-    (Join-Path $projectRoot 'SECURITY.md'),
-    (Join-Path $projectRoot 'SUPPORT.md'),
-    (Join-Path $projectRoot 'THIRD-PARTY-NOTICES.md')
+    (Join-Path $projectRoot 'LICENSE')
 )
 foreach ($file in $files) {
     if (-not (Test-Path -LiteralPath $file)) { throw "Release file not found: $file" }
