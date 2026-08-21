@@ -601,7 +601,8 @@ namespace SpaceRangersHdSaveEditor
                 { "TSHIPFORM/lblKillInCurSystemNormals", "Коалиционных в системе:" },
                 { "TSHIPFORM/lblKillInCurSystemDominators", "Доминаторов в системе:" },
                 { "TSHIPFORM/lblKillInCurSystemPirates", "Пиратов в системе:" },
-                { "TSHIPFORM/lblRank", "Ранг коалиции:" }
+                { "TSHIPFORM/lblRank", "Ранг коалиции:" },
+                { "TSHIPFORM/chbOrderAbsolute", "Приоритет" }
             };
 
         private static readonly Dictionary<string, string> RussianCaptionOverrides =
@@ -1493,7 +1494,7 @@ namespace SpaceRangersHdSaveEditor
                 takeWidth, collectionHeight);
             GroupBox relations = Registered<GroupBox>(controls, "gbRelationToRangers");
             if (relations != null && string.Equals(relations.Text, "Отношение к рейнджерам",
-                StringComparison.OrdinalIgnoreCase)) relations.Text = "Отношения рейнджеров";
+                StringComparison.OrdinalIgnoreCase)) relations.Text = "Отношения";
             PlaceListGroup(relations,
                 Registered<ListBox>(controls, "lbRelationToRangers"),
                 thirdX + takeWidth + gap, collectionTop, relationWidth, collectionHeight);
